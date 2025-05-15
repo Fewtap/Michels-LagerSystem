@@ -1,0 +1,444 @@
+{
+  "Products": [
+    {
+      "Article": 9213,
+      "Name": "Qplex No.0\nBOND STRENGTHENING SPRAY",
+      "Size": 145,
+      "Unit": "ml",
+      "PCS": 12,
+      "EAN": "7350081640514"
+    },
+    {
+      "Article": 1012,
+      "Name": "Qplex No.3\nBOND ENHANCER",
+      "Size": 100,
+      "Unit": "ml",
+      "PCS": 12,
+      "EAN": "7350081640392"
+    },
+    {
+      "Article": 9232,
+      "Name": "Qplex No.4\nBOND STRENGTHENING SHAMPOO",
+      "Size": 250,
+      "Unit": "ml",
+      "PCS": 12,
+      "EAN": "7350081640545"
+    },
+    {
+      "Article": 9242,
+      "Name": "Qplex No.5\nBOND STRENGTHENING CONDITIONER",
+      "Size": 250,
+      "Unit": "ml",
+      "PCS": 12,
+      "EAN": "7350081640552"
+    },
+    {
+      "Article": 9233,
+      "Name": "Qplex No.6\nBOND RENEW TREATMENT",
+      "Size": 100,
+      "Unit": "ml",
+      "PCS": 12,
+      "EAN": "7350081640569"
+    },
+    {
+      "Article": 9234,
+      "Name": "Qplex No.7\nBOND REPAIR OIL",
+      "Size": 50,
+      "Unit": "ml",
+      "PCS": 12,
+      "EAN": "7350081640576"
+    },
+    {
+      "Article": 9235,
+      "Name": "Qplex No.8\nBOND REPAIR HAIR MASK",
+      "Size": 100,
+      "Unit": "ml",
+      "PCS": 12,
+      "EAN": "7350081640583"
+    },
+    {
+      "Article": 1001,
+      "Name": "Arganmidas Argan Oil ",
+      "Size": 100,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640040"
+    },
+    {
+      "Article": 1002,
+      "Name": "Arganmidas Clear Hydrating Shampoo",
+      "Size": 450,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640019"
+    },
+    {
+      "Article": 1003,
+      "Name": "Arganmidas Clear Hydrating Conditioner",
+      "Size": 450,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640026"
+    },
+    {
+      "Article": 1004,
+      "Name": "Arganmidas Instant Repairing Mask",
+      "Size": 300,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640033"
+    },
+    {
+      "Article": 1005,
+      "Name": "Arganmidas Fresh Curls Essence",
+      "Size": 200,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640088"
+    },
+    {
+      "Article": 1006,
+      "Name": "Arganmidas Fresh Moisturizing Cream",
+      "Size": 200,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640071"
+    },
+    {
+      "Article": 1007,
+      "Name": "Arganmidas Real Control Spray",
+      "Size": 100,
+      "Unit": "ml",
+      "PCS": 12,
+      "EAN": "7350081640064"
+    },
+    {
+      "Article": 1008,
+      "Name": "Arganmidas Travel Kit",
+      "Size": 100,
+      "Unit": "ml",
+      "PCS": 12,
+      "EAN": "7350081640095"
+    },
+    {
+      "Article": 1009,
+      "Name": "Arganmidas Clear Hydrating Shampoo",
+      "Size": 1000,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640101"
+    },
+    {
+      "Article": 1010,
+      "Name": "Arganmidas Clear Hydrating Conditioner",
+      "Size": 1000,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640118"
+    },
+    {
+      "Article": 1014,
+      "Name": "Arganmidas Voloume Shampoo",
+      "Size": 450,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640200"
+    },
+    {
+      "Article": 1015,
+      "Name": "Arganmidas Clean Anti Dandruff Shampoo ",
+      "Size": 450,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640217"
+    },
+    {
+      "Article": 1017,
+      "Name": "Arganmidas Amino Acid Shampoo",
+      "Size": 450,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640293"
+    },
+    {
+      "Article": 1018,
+      "Name": "Arganmidas Anti Hairloss",
+      "Size": 300,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640231"
+    },
+    {
+      "Article": 2012,
+      "Name": "Arganmidas Hairdryer",
+      "Size": "X",
+      "Unit": "ml",
+      "PCS": 1,
+      "EAN": "7350081640057"
+    },
+    {
+      "Article": 9206,
+      "Name": "Arganmidas Color Protect Shampoo",
+      "Size": 1000,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640477"
+    },
+    {
+      "Article": 9207,
+      "Name": "Arganmidas Color Protect Conditioner",
+      "Size": 1000,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640484"
+    },
+    {
+      "Article": 9212,
+      "Name": "Arganmidas Keratin Hair Mask",
+      "Size": 300,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640453"
+    },
+    {
+      "Article": 9208,
+      "Name": "Arganmidas Keratin Treatment Shampoo",
+      "Size": 450,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640439"
+    },
+    {
+      "Article": 9209,
+      "Name": "Arganmidas Keratin Treatment Conditioner",
+      "Size": 450,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640507"
+    },
+    {
+      "Article": 9210,
+      "Name": "Arganmidas Keratin Treatment Shampoo",
+      "Size": 1000,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640446"
+    },
+    {
+      "Article": 9211,
+      "Name": "Arganmidas Keratin Treatment Conditioner",
+      "Size": 1000,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640491"
+    },
+    {
+      "Article": 9204,
+      "Name": "Arganmidas Color Protect Shampoo",
+      "Size": 450,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640415"
+    },
+    {
+      "Article": 9205,
+      "Name": "ArganmidasColor Protect Conditioner",
+      "Size": 450,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640422"
+    },
+    {
+      "Article": 9202,
+      "Name": "Arganmidas No Yellow Hair Mask",
+      "Size": 300,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640408"
+    },
+    {
+      "Article": 9203,
+      "Name": "Arganmidas No Yellow Silver Shampoo",
+      "Size": 300,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640460"
+    },
+    {
+      "Article": 9238,
+      "Name": "Arganmidas Rosemary Mint Revitalizing Shampoo",
+      "Size": 1000,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640774"
+    },
+    {
+      "Article": 9239,
+      "Name": "Arganmidas Rosemary Mint Revitalizing Conditioner",
+      "Size": 1000,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640781"
+    },
+    {
+      "Article": 9221,
+      "Name": "Arganmidas Rosemary Mint Revitalizing Shampoo",
+      "Size": 450,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640651"
+    },
+    {
+      "Article": 9222,
+      "Name": "Arganmidas Rosemary Mint Revitalizing Conditioner",
+      "Size": 450,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640668"
+    },
+    {
+      "Article": 9223,
+      "Name": "Arganmidas Rosemary Mint Revitalizing Hair Mask",
+      "Size": 300,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640675"
+    },
+    {
+      "Article": 9224,
+      "Name": "Arganmidas Rosemary Mint Revitalizing Hair Oil",
+      "Size": 100,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640682"
+    },
+    {
+      "Article": 9225,
+      "Name": "Arganmidas Rosemary Mint Revitalizing Scalp Scrub",
+      "Size": "300g",
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640699"
+    },
+    {
+      "Article": 9236,
+      "Name": "Arganmidas Nourishing Curls Shampoo",
+      "Size": 1000,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640750"
+    },
+    {
+      "Article": 9237,
+      "Name": "Arganmidas Nourishing Curls Conditioner",
+      "Size": 1000,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640767"
+    },
+    {
+      "Article": 9215,
+      "Name": "Arganmidasm Nourishing Curls Shampoo",
+      "Size": 450,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640590"
+    },
+    {
+      "Article": 9216,
+      "Name": "Arganmidas Nourishing Curls Conditioner",
+      "Size": 450,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640606"
+    },
+    {
+      "Article": 9217,
+      "Name": "Arganmidas Nourishing Curls Essence",
+      "Size": 200,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640613"
+    },
+    {
+      "Article": 9218,
+      "Name": "Arganmidas Nourishing Curls Detangling Hair Spray",
+      "Size": 250,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640620"
+    },
+    {
+      "Article": 9219,
+      "Name": "Arganmidas Nourishing Curls Hair Oil",
+      "Size": 100,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640637"
+    },
+    {
+      "Article": 9220,
+      "Name": "Arganmidas Nourishing Curls Hair Mask",
+      "Size": 300,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640644"
+    },
+    {
+      "Article": 9240,
+      "Name": "Arganmidas Moroccan Argan Oil Volume Shampoo",
+      "Size": 1000,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640798"
+    },
+    {
+      "Article": 9241,
+      "Name": "Arganmidas Moroccan Argan Oil Volume Conditioner",
+      "Size": 1000,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640804"
+    },
+    {
+      "Article": 9226,
+      "Name": "Arganmidas Moroccan Argan Oil Volume Shampoo",
+      "Size": 450,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640705"
+    },
+    {
+      "Article": 9227,
+      "Name": "Arganmidas Moroccan Argan Oil Volume Conditioner",
+      "Size": 450,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640712"
+    },
+    {
+      "Article": 9228,
+      "Name": "Arganmidas Volume Boost Hair Mask",
+      "Size": 300,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640729"
+    },
+    {
+      "Article": 9229,
+      "Name": "Arganmidas Volume Treatment Oil",
+      "Size": 100,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640736"
+    },
+    {
+      "Article": 9230,
+      "Name": "Arganmidas Volume Root Spray",
+      "Size": 250,
+      "Unit": "ml",
+      "PCS": 6,
+      "EAN": "7350081640743"
+    }
+  ]
+}
