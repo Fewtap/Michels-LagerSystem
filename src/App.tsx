@@ -4,60 +4,30 @@ import { Conversion } from './Classes/Conversion';
 
 import './App.css'
 import Database from './SUPABASE/supabase';
+import Navbar from './Components/Navbar/Navbar';
+import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { Inventory } from './Pages/Inventory';
 
 function App() {
-  const [ArticleList, setArticleList] = useState<Article[]>([])
+  
 
 
-  useEffect(() => {
-      let db = Database.getInstance()
-
-      db.getItems("Products").then((data) => {
-        if (data) {
-          try{
-          const articles = Conversion.convertToArticles(data);
-          setArticleList(articles);
-          }
-          catch (error) {
-            console.error("Error converting data:", error)
-          }
-        } else {
-          console.error("No data found")
-        }
-      }
-      ).catch((error) => {
-        console.error("Error fetching data:", error)
-      }
-      )
-
-      ArticleList.forEach((article) => {
-        console.log(article.toString())
-      }
-      )
-  }, [])
+ 
 
   return (
-    <>
-    <button onClick={() => {
-      ArticleList.forEach((article) => {
-        console.log(article.toString())
-      }
-      )
-    }}>Check List</button>
-      <div>
-        {
-          ArticleList.map((article, index) => (
-            <div>
-              <h1 key={index}>{article.Name}</h1>
-              <button key={index + "A"} onClick={() => {
-                console.log(article.printName())
-              }
-              }>Check</button>
-            </div>
-          ))
-        }
-      </div>
-    </>
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<h1>Home</h1>} />
+        <Route path="/inventory" element={<Inventory/>} />
+        <Route path="/orders" element={<h1>Orders</h1>} />
+        <Route path="/suppliers" element={<h1>Suppliers</h1>} />
+        <Route path="/reports" element={<h1>Reports</h1>} />
+        <Route path="/settings" element={<h1>Settings</h1>} />
+        <Route path="/articles" element={<h1>Articles</h1>} />
+        <Route path="/articles/:id" element={<h1>Article Details</h1>} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
