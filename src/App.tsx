@@ -3,15 +3,21 @@ import { Article } from './Classes/Article';
 import { Conversion } from './Classes/Conversion';
 
 import './App.css'
-import Database from './SUPABASE/supabase';
+import DatabaseClient from './SUPABASE/DatabaseClient';
 import Navbar from './Components/Navbar/Navbar';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import { Inventory } from './Pages/Inventory';
+import { Inventory } from './Pages/Inventory/Inventory';
+import type { Database } from './Interfaces/types';
+
 
 function App() {
   
 
 
+
+     
+      
+      
  
 
   return (

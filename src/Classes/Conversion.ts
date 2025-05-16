@@ -1,5 +1,6 @@
 import { Article } from "./Article";
-import Database from "../SUPABASE/supabase";
+import DatabaseClient from "../SUPABASE/DatabaseClient";
+import { Location } from "./Location";
 
 
 
@@ -28,19 +29,24 @@ export class Conversion{
         if (!data.Name || !data.Size || !data.Unit || !data.PCS || !data.EAN) {
             throw new Error("Invalid data");
         }
-        return new Article(
-            data.Article,
-            data.Name,
-            data.Size,
-            data.Unit,
-            data.PCS,
-            data.EAN
-        );
+        return new Article(data);
     }
 
     static convertToArticles(data: any[]): Article[] {
         // Convert the array of data to an array of Article objects
         return data.map(item => this.convertToArticle(item));
+    }
+
+    static convertToLocation(data: any): Location {
+        if (!data.location_id || !data.location_code) {
+            throw new Error("Invalid data");
+        }
+        return new Location(data)
+    }
+
+    static convertToLocations(data: any[]): Location[] {
+        // Convert the array of data to an array of Location objects
+        return data.map(item => this.convertToLocation(item));
     }
 
 }

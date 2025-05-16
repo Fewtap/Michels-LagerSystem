@@ -1,8 +1,10 @@
 
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
-const supabaseUrl = 'https://ciflzdtzoiawmkfuwmux.supabase.co'
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNpZmx6ZHR6b2lhd21rZnV3bXV4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0NzE1NTk2MiwiZXhwIjoyMDYyNzMxOTYyfQ.I5hCxKDJ2PxWcKhQdTVBgvD0151R5bWUTmpIVH9BCW8"
-
+import type { Database } from '../Interfaces/types'
+import type { Article } from '../Classes/Article'
+import { Conversion } from '../Classes/Conversion'
+const supabaseUrl = import.meta.env.VITE_API_URL
+const supabaseKey = import.meta.env.VITE_LOCAL_API_KEY
 
 
 
@@ -24,10 +26,10 @@ const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
  * const dbInstance = Database.getInstance();
  * ```
  */
-export default class Database {
+export default class DatabaseClient {
 
-    public db!: SupabaseClient
-    static Instance: Database
+    public db!: SupabaseClient<Database>
+    static Instance: DatabaseClient
 
     /**
      * The constructor is private to prevent direct instantiation of the class.
@@ -35,13 +37,13 @@ export default class Database {
      */
     private constructor() {
         // Prevent instantiation
-        if (Database.Instance) {
+        if (DatabaseClient.Instance) {
             throw new Error("Use Database.getInstance() to get the single instance of this class.")
         }
 
         // Initialize the Supabase client
         this.connect()
-        Database.Instance = this
+        DatabaseClient.Instance = this
         console.log("Supabase client initialized")
     }
 
@@ -64,7 +66,7 @@ export default class Database {
      */
     private connect() {
         if (!this.db) {
-            this.db = createClient(supabaseUrl, supabaseKey)
+            this.db = createClient<Database>(supabaseUrl, supabaseKey)
             console.log("Connected to Supabase")
         } else {
             console.log("Already connected to Supabase")
@@ -77,32 +79,28 @@ export default class Database {
      * 
      * @returns The singleton instance of the `Database` class.
      */
-    static getInstance(): Database {
-        if(!Database.Instance) {
-            Database.Instance = new Database()
+    static getInstance(): DatabaseClient {
+        if(!DatabaseClient.Instance) {
+            DatabaseClient.Instance = new DatabaseClient()
         }
 
-        return Database.Instance;
+        return DatabaseClient.Instance;
     }
-    /**
-     * Fetches all items from the specified table in the Supabase database.
-     * 
-     * @param table - The name of the table to fetch data from.
-     * @returns A promise that resolves to an array of items or null if an error occurs.
-     */
-    async getItems(table: string): Promise<any[] | null> {
-        const { data, error } = await this.db
-            .from(table).select('*')
+
+    static async fetchAllArticles(): Promise<Article[]> {
+        const { data, error } = await DatabaseClient.getInstance().db
+            .from("Articles")
+            .select("*")
+
         if (error) {
-            console.error("Error fetching data:", error)
-            return null
-        }
-        if (data) {
-            return data
+            console.error("Error fetching articles:", error)
+            return []
         } else {
-            console.error("No data found")
-            return null
+            let articles: Article[] = Conversion.convertToArticles(data)
+            console.log("Fetched articles:", articles)
+            return articles
         }
     }
+    
 }
 

@@ -6,8 +6,8 @@
     justify-content: space-between;
     align-items: center;
     font-family: Arial, sans-serif;
-    width: 100%;
-    position: fixed;
+    max-width: 100%;
+    
     top: 0;
     left: 0;
     z-index: 1000;
