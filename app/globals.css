@@ -2,9 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+}
+
+select{
+  color: black;
 }
 
 @media (prefers-color-scheme: dark) {
