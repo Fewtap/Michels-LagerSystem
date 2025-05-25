@@ -1,59 +1,54 @@
-import { createClient } from '@/utils/serverclient';
-import './page.css'
-import { redirect } from 'next/navigation';
+'use client';
 
-export default function Login(){
+import { useFormState } from 'react-dom';
+import { useActionState, useEffect } from 'react';
+import { handleLogin } from './actions';
+import './page.css';
+import toast, { Toaster } from 'react-hot-toast';
+import Link from 'next/link';
 
-    async function handleLogin(formData: FormData) {
-        'use server';
-        const username = formData.get('email') as string;
-        const password = formData.get('password') as string;
-        console.log('Login attempt with username:', username, 'and password:', password)
+const initialState = {
+  message: '',
+  error: false,
+};
 
-        const supabase = await createClient();
-        const { data, error } = await supabase.auth.signInWithPassword({
-            email: username,
-            password: password,
-        });
 
-        if (error) {
-            console.error('Login error:', error);
-            // Optionally, you can redirect or set a cookie/flash message here
-            return;
-        }
-        console.log('Login successful:', data);
-        // Redirect to the home page or another page after successful login
-        // For example, using Next.js redirect:
-        // redirect('/');
-        redirect('/'); // Redirect to home page after successful login
+export default function Login() {
+  const [state, formAction] = useActionState(handleLogin, initialState);
+
+  useEffect(() => {
+    if(state.error){
+        toast.error(state.message,{
+            position:"bottom-center"
+        })
     }
+  }, [state]);
 
-
-    return (
-        <div>
-        <h1>Login Page</h1>
-        <p>Please log in to continue.</p>
-        <form className="flex flex-col items-center justify-center h-screen" action={handleLogin}>
-            <div className="mb-4">
-                <label htmlFor="email">E-mail:</label>
-                <input type="text" id="email" name="email" required />
-            </div>
-            <div className="mb-4">
-                <label htmlFor="password">Password:</label>
-                <input type="password" id="password" name="password" required />
-            </div>
-            <button
-            formAction={handleLogin}
-                id='login-button'
-                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded shadow-md transition duration-200"
-                type="submit"
-            >
-                Login
-            </button>
-        </form>
-        <p>Don't have an account? <a href="/register">Register here</a>.</p>
-        <p>Forgot your password? <a href="/reset-password">Reset it here</a>.</p>
-        <p>Need help? <a href="/help">Visit our help page</a>.</p>
+  return (
+    <div className='flex flex-col'>
+        <Toaster></Toaster>
+        <h1>Don't have an account? Register <Link href={"/register"} className='underline'>here</Link></h1>
+      
+      
+      <form className="flex flex-col items-center justify-center h-screen" action={formAction}>
+        <div className="mb-4">
+          <label htmlFor="email">E-mail:</label>
+          <input type="text" id="email" name="email" required />
         </div>
-    );
+        
+        <div className="mb-4">
+          <label htmlFor="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        
+        <button
+          id='login-button'
+          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded shadow-md transition duration-200"
+          type="submit"
+        >
+          Login
+        </button>
+      </form>
+    </div>
+  );
 }

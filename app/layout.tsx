@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/navbar/navbar";
 import { createClient } from "@/utils/serverclient";
 import { Database } from "@/Types/database.types";
 import { SupabaseClient } from "@supabase/supabase-js";

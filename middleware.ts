@@ -21,7 +21,7 @@ export async function middleware(request: NextRequest) {
 
   const session: User | null = await checkAuth();
   console.log("Session:", session);
-  if (!session  && request.nextUrl.pathname !== "/login") {
+  if (!session  && request.nextUrl.pathname !== "/login" && request.nextUrl.pathname !== "/register") {
     // If no session, redirect to login page
     return NextResponse.redirect(new URL("/login", request.url));
   }
