@@ -1,4 +1,4 @@
-import type { Database,Article, Inventory } from "@/Types/database.types";
+import type { Database,Article, Inventory,JoinedArticle } from "@/Types/database.types";
 import { createClient } from "@supabase/supabase-js";
 import { error } from "console";
 
@@ -6,9 +6,7 @@ export default async function ArticleDetails({params}: {
     params: Promise<{id: string}>
 }) {
 
-    type JoinedArticle = Article & {
-        inventories: Inventory[]
-    }
+    
 
     const supabase = createClient<Database>(
         process.env.NEXT_PUBLIC_SUPABASE_URL || "",

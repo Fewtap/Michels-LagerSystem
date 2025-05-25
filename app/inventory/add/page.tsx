@@ -1,10 +1,14 @@
 "use client";
 
-import { Article, Location, JoinedInventory, Database } from "@/Types/database.types";
+import {
+    Article,
+    Database,
+    JoinedInventory,
+    Location,
+} from "@/Types/database.types";
 import { createClient } from "@/utils/browserclient";
 import { SupabaseClient } from "@supabase/supabase-js";
-import { useState, useEffect } from "react";
-
+import { useEffect, useState } from "react";
 
 export default function Add() {
     //fetched from the db
@@ -13,7 +17,11 @@ export default function Add() {
     //values from the DOM selections
     const [selectedArticle, setselectedArticle] = useState<Article>();
     const [selectedLocation, setselectedLocation] = useState<Location>();
-    const [SelectedLocationInventories, setSelectedLocationInventories] = useState<JoinedInventory[]>();
+    const [SelectedLocationInventories, setSelectedLocationInventories] =
+        useState<JoinedInventory[]>();
+    const [ArticleExistsInLocation, setArticleExistsInLocation] = useState<
+        boolean
+    >(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,23 +34,23 @@ export default function Add() {
             if (articlesResponse.error) {
                 console.error(
                     "Could not fetch articles: ",
-                    articlesResponse.error.message
+                    articlesResponse.error.message,
                 );
             }
 
             if (locationsResponse.error) {
                 console.error(
                     "Could not fetch locations:",
-                    locationsResponse.error.message
+                    locationsResponse.error.message,
                 );
             }
 
             let articles = (articlesResponse.data as Article[]).sort(
-                (a, b) => a.article_id - b.article_id
+                (a, b) => a.article_id - b.article_id,
             );
             let locations = (locationsResponse.data as Location[]).sort((
                 a,
-                b
+                b,
             ) => (a.location_code ?? "").localeCompare(b.location_code ?? ""));
 
             setArticles(articles);
@@ -55,6 +63,18 @@ export default function Add() {
 
         fetchData();
     }, []);
+
+    useEffect(() => {
+        //Checks if the article is in the location or not
+        //Checks whenever the selected article or location changes
+        let exists = SelectedLocationInventories?.some((i) =>
+            i.article_id == selectedArticle?.article_id &&
+            i.location_id == selectedLocation?.location_id
+        );
+
+        setArticleExistsInLocation(exists!);
+        console.log(exists);
+    }, [selectedLocation, selectedArticle, SelectedLocationInventories]);
 
     // Handle select change
     const handleArticleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -72,26 +92,25 @@ export default function Add() {
     };
 
     const HandleLocationChange = async (
-        e: React.ChangeEvent<HTMLSelectElement>
+        e: React.ChangeEvent<HTMLSelectElement>,
     ) => {
-        const location = Locations?.find((l) => l.location_id == e.target.value
+        const location = Locations?.find((l) =>
+            l.location_id == e.target.value
         );
-
-        setselectedLocation(location);
 
         const supabase: SupabaseClient<Database> = createClient();
 
-        const { data, error } = await (await supabase.from("inventories").select(
-            "*, Location:Locations(*),Article:Articles(*)"
-        ).filter("location_id", "eq", location?.location_id));
+        const { data, error } =
+            await (await supabase.from("inventories").select(
+                "*, Location:Locations(*),Article:Articles(*)",
+            ).filter("location_id", "eq", location?.location_id));
 
         if (error) {
             console.error("Error fetching the inventories:", error.message);
         }
 
-
-
         setSelectedLocationInventories(data as JoinedInventory[]);
+        setselectedLocation(location);
     };
 
     return (
@@ -151,20 +170,21 @@ export default function Add() {
                                         )}
                                 </select>
                             </div>
+                            
                             <div>
                                 <h1>Articles in location:</h1>
                                 <ul className="mt-5">
                                     {(SelectedLocationInventories?.length)! > 0
                                         ? (
                                             SelectedLocationInventories!.map((
-                                                inventory
+                                                inventory,
                                             ) => (
                                                 <li
                                                     key={inventory.inventory_id}
                                                 >
                                                     {selectedArticle
-                                                        ?.article_id ==
-                                                        inventory.article_id
+                                                            ?.article_id ==
+                                                            inventory.article_id
                                                         ? `✅${inventory.Article.Name}`
                                                         : `⛔${inventory.Article.Name} `}
                                                     <br />
@@ -172,8 +192,11 @@ export default function Add() {
                                                 </li>
                                             ))
                                         )
-                                        : <h2>No Articles found in location
-                                        </h2>}
+                                        : (
+                                            <h2>
+                                                No Articles found in location
+                                            </h2>
+                                        )}
                                 </ul>
                             </div>
                         </div>
