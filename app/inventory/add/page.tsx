@@ -1,207 +1,120 @@
 "use client";
 
-import {
-    Article,
-    Database,
-    JoinedInventory,
-    Location,
-} from "@/Types/database.types";
-import { createClient } from "@/utils/browserclient";
-import { SupabaseClient } from "@supabase/supabase-js";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Toaster, toast } from "react-hot-toast";
+import { AddItem } from "./AddUtils";
+import { useInventoryData } from "./hooks/useInventoryData";
+import { useLocationInventory } from "./hooks/useLocationInventory";
+
+import type { Article, JoinedInventory } from "@/Types/database.types";
+import { ArticleSelector } from "./components/ArticleSelector";
+import { LocationSelector } from "./components/LocationSelector";
+import { AddItemModal } from "./components/AddItemModal";
+import { InventoryList } from "./components/InventoryList";
+import { useArticleExistence } from "./hooks/useArticleExistence";
+import { useEffect } from "react";
+
 
 export default function Add() {
-    //fetched from the db
-    const [Articles, setArticles] = useState<Article[] | null>();
-    const [Locations, setLocations] = useState<Location[] | null>();
-    //values from the DOM selections
-    const [selectedArticle, setselectedArticle] = useState<Article>();
-    const [selectedLocation, setselectedLocation] = useState<Location>();
-    const [SelectedLocationInventories, setSelectedLocationInventories] =
-        useState<JoinedInventory[]>();
-    const [ArticleExistsInLocation, setArticleExistsInLocation] = useState<
-        boolean
-    >(false);
+  const { articles, locations, loading: dataLoading, refetch } = useInventoryData();
+  const { selectedLocation, inventories, setLocation } = useLocationInventory();
+  
+  const [selectedArticle, setSelectedArticle] = useState<Article>();
+  const [showModal, setShowModal] = useState(false);
+  const [amount, setAmount] = useState(100);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const supabase: SupabaseClient<Database> = await createClient();
-            const [articlesResponse, locationsResponse] = await Promise.all([
-                supabase.from("Articles").select("*"),
-                supabase.from("Locations").select("*"),
-            ]);
+  const articleExists = useArticleExistence(selectedArticle, selectedLocation, inventories);
 
-            if (articlesResponse.error) {
-                console.error(
-                    "Could not fetch articles: ",
-                    articlesResponse.error.message,
-                );
-            }
+  // Initialize with first items when data loads
+  // Initialize with first items when data loads
 
-            if (locationsResponse.error) {
-                console.error(
-                    "Could not fetch locations:",
-                    locationsResponse.error.message,
-                );
-            }
+  useEffect(() => {
+    if (articles.length > 0 && !selectedArticle) {
+      setSelectedArticle(articles[0]);
+    }
+    if (locations.length > 0 && !selectedLocation) {
+      setLocation(locations[0]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [articles, locations]);
 
-            let articles = (articlesResponse.data as Article[]).sort(
-                (a, b) => a.article_id - b.article_id,
-            );
-            let locations = (locationsResponse.data as Location[]).sort((
-                a,
-                b,
-            ) => (a.location_code ?? "").localeCompare(b.location_code ?? ""));
+  const handleInventoryUpdate = async () => {
+    if (!selectedArticle || !selectedLocation) return;
 
-            setArticles(articles);
-            setLocations(locations);
-
-            if (articles.length > 0) {
-                setselectedArticle(articles[0]); // ✅ set after fetched
-            }
-        };
-
-        fetchData();
-    }, []);
-
-    useEffect(() => {
-        //Checks if the article is in the location or not
-        //Checks whenever the selected article or location changes
-        let exists = SelectedLocationInventories?.some((i) =>
-            i.article_id == selectedArticle?.article_id &&
-            i.location_id == selectedLocation?.location_id
+    try {
+      if (articleExists) {
+        const inventory = inventories.find(
+          (inv) =>
+            inv.article_id === selectedArticle.article_id &&
+            inv.location_id === selectedLocation.location_id
         );
+        await AddItem(selectedArticle, selectedLocation, amount, inventory);
+      } else {
+        await AddItem(selectedArticle, selectedLocation, amount);
+      }
 
-        setArticleExistsInLocation(exists!);
-        console.log(exists);
-    }, [selectedLocation, selectedArticle, SelectedLocationInventories]);
+      toast.success("Item added successfully!");
+      await refetch();
+      await setLocation(selectedLocation)
+    } catch (error) {
+      toast.error("Failed to add item");
+      console.error("Error adding item:", error);
+    }
+  };
 
-    // Handle select change
-    const handleArticleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const selectedValue = e.target.value;
-
-        if (selectedValue === "") {
-            setselectedArticle(undefined);
-            return;
-        }
-
-        const selectedId = parseInt(selectedValue);
-        const article = Articles?.find((a) => a.article_id === selectedId);
-        setselectedArticle(article);
-        console.log("Selected article:", article); // Add this to debug
-    };
-
-    const HandleLocationChange = async (
-        e: React.ChangeEvent<HTMLSelectElement>,
-    ) => {
-        const location = Locations?.find((l) =>
-            l.location_id == e.target.value
-        );
-
-        const supabase: SupabaseClient<Database> = createClient();
-
-        const { data, error } =
-            await (await supabase.from("inventories").select(
-                "*, Location:Locations(*),Article:Articles(*)",
-            ).filter("location_id", "eq", location?.location_id));
-
-        if (error) {
-            console.error("Error fetching the inventories:", error.message);
-        }
-
-        setSelectedLocationInventories(data as JoinedInventory[]);
-        setselectedLocation(location);
-    };
-
+  if (dataLoading) {
     return (
-        <main>
-            <section>
-                {!Articles
-                    ? (
-                        <div>
-                            <h1>Loading...</h1>
-                        </div>
-                    )
-                    : (
-                        <div className="flex flex-col justify-center items-center gap-5">
-                            <div className="flex gap-2">
-                                <label>Article</label>
-                                <select
-                                    className="text-black px-5"
-                                    id="articles"
-                                    value={selectedArticle?.article_id}
-                                    onChange={handleArticleChange}
-                                >
-                                    {Articles.map((article) => (
-                                        <option
-                                            key={article.article_id}
-                                            value={article.article_id}
-                                        >
-                                            {`${article.article_id}: ${article.Name}`}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div className="flex gap-2">
-                                <label>Location</label>
-                                <select
-                                    name="locations"
-                                    id="locations"
-                                    value={selectedLocation?.location_id}
-                                    className="px-3"
-                                    onChange={HandleLocationChange}
-                                >
-                                    {Locations
-                                        ? (
-                                            Locations.map((location) => (
-                                                <option
-                                                    value={location.location_id}
-                                                    key={location.location_id}
-                                                    className="px-3"
-                                                >
-                                                    {`${location.location_code}`}
-                                                </option>
-                                            ))
-                                        )
-                                        : (
-                                            <div>
-                                                <p>No Locations found</p>
-                                            </div>
-                                        )}
-                                </select>
-                            </div>
-                            
-                            <div>
-                                <h1>Articles in location:</h1>
-                                <ul className="mt-5">
-                                    {(SelectedLocationInventories?.length)! > 0
-                                        ? (
-                                            SelectedLocationInventories!.map((
-                                                inventory,
-                                            ) => (
-                                                <li
-                                                    key={inventory.inventory_id}
-                                                >
-                                                    {selectedArticle
-                                                            ?.article_id ==
-                                                            inventory.article_id
-                                                        ? `✅${inventory.Article.Name}`
-                                                        : `⛔${inventory.Article.Name} `}
-                                                    <br />
-                                                    {`Quantity: ${inventory.quantity}`}
-                                                </li>
-                                            ))
-                                        )
-                                        : (
-                                            <h2>
-                                                No Articles found in location
-                                            </h2>
-                                        )}
-                                </ul>
-                            </div>
-                        </div>
-                    )}
-            </section>
-        </main>
+      <main>
+        <div className="flex justify-center items-center h-64">
+          <h1>Loading...</h1>
+        </div>
+      </main>
     );
+  }
+
+  return (
+    <main>
+      <Toaster />
+      <section>
+        <div className="flex flex-col justify-center items-center gap-5">
+          <ArticleSelector
+            articles={articles}
+            selectedArticle={selectedArticle}
+            onArticleChange={setSelectedArticle}
+          />
+          
+          <div className="flex gap-2">
+            <LocationSelector
+              locations={locations}
+              selectedLocation={selectedLocation}
+              onLocationChange={setLocation}
+            />
+            <button
+              className="px-4 py-2 bg-blue-600 text-white rounded shadow hover:bg-blue-700 disabled:bg-gray-300 disabled:text-gray-500 transition-colors"
+              onClick={() => setShowModal(true)}
+              disabled={!selectedArticle || !selectedLocation}
+            >
+              Add Article to location...
+            </button>
+          </div>
+
+          <AddItemModal
+            open={showModal}
+            onClose={() => setShowModal(false)}
+            selectedArticle={selectedArticle}
+            selectedLocation={selectedLocation}
+            amount={amount}
+            onAmountChange={setAmount}
+            onConfirm={handleInventoryUpdate}
+          />
+
+          <InventoryList
+            inventories={inventories}
+            selectedArticle={selectedArticle}
+          />
+        </div>
+      </section>
+    </main>
+  );
 }
+
