@@ -15,7 +15,7 @@ export type JoinedLocation = Location & {
 }
 
 export type JoinedArticle = Article & {
-        inventories: Inventory[]
+        inventories: JoinedInventory[]
     }
 
 

@@ -7,10 +7,10 @@ import { useInventoryData } from "./hooks/useInventoryData";
 import { useLocationInventory } from "./hooks/useLocationInventory";
 
 import type { Article, JoinedInventory } from "@/Types/database.types";
-import { ArticleSelector } from "./components/ArticleSelector";
-import { LocationSelector } from "./components/LocationSelector";
-import { AddItemModal } from "./components/AddItemModal";
-import { InventoryList } from "./components/InventoryList";
+import { ArticleSelector } from "./hooks/components/ArticleSelector";
+import { LocationSelector } from "./hooks/components/LocationSelector";
+import { AddItemModal } from "./hooks/components/AddItemModal";
+import { InventoryList } from "./hooks/components/InventoryList";
 import { useArticleExistence } from "./hooks/useArticleExistence";
 import { useEffect } from "react";
 
