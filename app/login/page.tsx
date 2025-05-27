@@ -1,6 +1,5 @@
 'use client';
 
-import { useFormState } from 'react-dom';
 import { useActionState, useEffect } from 'react';
 import { handleLogin } from './actions';
 import './page.css';
@@ -27,7 +26,7 @@ export default function Login() {
   return (
     <div className='flex flex-col'>
         <Toaster></Toaster>
-        <h1>Don't have an account? Register <Link href={"/register"} className='underline'>here</Link></h1>
+        <h1>Don&#39;t have an account? Register <Link href={"/register"} className='underline'>here</Link></h1>
       
       
       <form className="flex flex-col items-center justify-center h-screen" action={formAction}>

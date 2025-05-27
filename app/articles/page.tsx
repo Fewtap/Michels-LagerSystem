@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Card from "@/components/Card";
 import { Database, JoinedArticle } from "@/Types/database.types";
 import { createClient } from "@/utils/browserclient";
-import Link from "next/link";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { redirect } from "next/navigation";
 

@@ -3,7 +3,7 @@
 import { createClient } from '@/utils/serverclient';
 import { redirect } from 'next/navigation';
 
-export async function handleLogin(prevState: any, formData: FormData) {
+export async function handleLogin(prevState: never, formData: FormData) {
   const username = formData.get('email') as string;
   const password = formData.get('password') as string;
   
