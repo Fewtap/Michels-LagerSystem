@@ -9,6 +9,7 @@ export function useInventoryData() {
   
   const [loading, setLoading] = useState(true);
 
+  
   const fetchData = async () => {
     setLoading(true);
     const supabase: SupabaseClient<Database> = createClient();

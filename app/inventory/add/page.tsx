@@ -7,10 +7,10 @@ import { useInventoryData } from "./hooks/useInventoryData";
 import { useLocationInventory } from "./hooks/useLocationInventory";
 
 import type { Article, JoinedInventory } from "@/Types/database.types";
-import { ArticleSelector } from "./hooks/components/ArticleSelector";
-import { LocationSelector } from "./hooks/components/LocationSelector";
-import { AddItemModal } from "./hooks/components/AddItemModal";
-import { InventoryList } from "./hooks/components/InventoryList";
+import { ArticleSelector } from "./components/ArticleSelector";
+import { LocationSelector } from "./components/LocationSelector";
+import { AddItemModal } from "./components/AddItemModal";
+import { InventoryList } from "./components/InventoryList";
 import { useArticleExistence } from "./hooks/useArticleExistence";
 import { useEffect } from "react";
 
@@ -90,7 +90,7 @@ export default function Add() {
               onLocationChange={setLocation}
             />
             <button
-              className="px-4 py-2 bg-blue-600 text-white rounded shadow hover:bg-blue-700 disabled:bg-gray-300 disabled:text-gray-500 transition-colors"
+              className="px-4 py-2 bg-[#A8763E] text-white rounded shadow hover:bg-[#3A5A40] disabled:bg-gray-300 disabled:text-gray-500 transition-colors"
               onClick={() => setShowModal(true)}
               disabled={!selectedArticle || !selectedLocation}
             >

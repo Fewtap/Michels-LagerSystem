@@ -9,13 +9,20 @@
   --foreground: #171717;
 }
 
-select{
+select, input, textarea{
   color: black;
 }
 
+label {
+  color: var(--foreground);
+}
+
+
+
+
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #000000;
     --foreground: #ededed;
   }
 }
@@ -24,4 +31,5 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  
 }

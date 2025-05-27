@@ -44,7 +44,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-r from-purple-950 to-[#301934]]`}
       >
         <Navbar user={session?.user!}></Navbar>
         <div className="h-[2vh]"></div>

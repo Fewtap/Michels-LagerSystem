@@ -24,7 +24,7 @@ const Card: React.FC<CardProps> = (
                 // Using 'outline' might override 'outlineWidth' if not careful.
                 // It's generally better to set them separately or use a shorthand.
                 // Here, let's just make the outline color change and keep width separate for clarity.
-                outline: "5px solid purple", // This sets width, style, and color.
+                outline: "2px solid #D4D2D5", // This sets width, style, and color.
                 // outlineWidth: "10px", // This would be overridden by the 'outline' shorthand above if it was applied *after*.
                 // If you want to animate the outline width on hover, you would animate it like this:
                 // outlineWidth: "10px", // or whatever value you desire
@@ -39,7 +39,7 @@ const Card: React.FC<CardProps> = (
             }}
           
             
-            className="border p-4 rounded-2xl m-2 bg-indigo-300 text-black"
+            className="border p-4 rounded-2xl m-2 bg-[#593161] text-[#D4D2D5]"
         >
             {children}
            

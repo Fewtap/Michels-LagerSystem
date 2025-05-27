@@ -40,17 +40,17 @@ export default function Articles() {
             <h1 className="text-2xl font-bold mb-4">Articles</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-6xl p-4">
                 {loading ? (
-                    <p className="text-gray-500">Loading...</p>
+                    <p className="">Loading...</p>
                 ) : articles.length > 0 ? (
                     articles.map((article) => (
                         <Card key={article.article_id} onClick={() => redirect(`/articles/${article.article_id}`)}>
                             <h2 className="text-xl font-semibold mb-2">{article.Name}</h2>
-                            <p className="text-gray-700 mb-2">EAN: {article.EAN}</p>
-                            <p className="text-gray-700 mb-2">PCS: {article.PCS}</p>
-                            <p className="text-gray-700 mb-2">Size: {article.Size}</p>
-                            <p className="text-gray-700 mb-2">Unit: {article.Unit}</p>
-                            <p className="text-gray-700 mb-2">Article ID: {article.article_id}</p>
-                            <h4 className="text-gray-700 mb-2">
+                            <p className=" mb-2">EAN: {article.EAN}</p>
+                            <p className=" mb-2">PCS: {article.PCS}</p>
+                            <p className=" mb-2">Size: {article.Size}</p>
+                            <p className="mb-2">Unit: {article.Unit}</p>
+                            <p className=" mb-2">Article ID: {article.article_id}</p>
+                            <h4 className=" mb-2">
                                 {article.inventories.length > 0
                                     ? `✅ Locations: ${article.inventories.length}`
                                     : "⛔ No locations found"}
