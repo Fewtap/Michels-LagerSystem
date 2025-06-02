@@ -1,6 +1,7 @@
 "use client";
 import { JoinedInventory } from "@/Types/database.types";
 import { Paper } from "@mui/material";
+import Link from "next/link";
 import { useState } from "react";
 
 interface InventoryInformationProps {
@@ -11,12 +12,17 @@ interface InventoryInformationProps {
 export default function InventoryInformation(
     { inventories, className }: InventoryInformationProps,
 ) {
-
-    const mouseoverElevation = 24
-    const [CardWithMouseOver, setCardWithMouseOver] = useState<string | null>(null);
+    const mouseoverElevation = 24;
+    const [CardWithMouseOver, setCardWithMouseOver] = useState<string | null>(
+        null,
+    );
 
     return (
-        <div className={`bg-white p-4 rounded-lg shadow text-black${className ?? ""}`}>
+        <div
+            className={`bg-white p-4 rounded-lg shadow text-black${
+                className ?? ""
+            }`}
+        >
             <h2 className="text-lg font-semibold mb-3">
                 Inventory by Location
             </h2>
@@ -24,60 +30,75 @@ export default function InventoryInformation(
                 ? (
                     <div className="space-y-3 ">
                         {inventories.map((i) => (
-                            <Paper
-                            onMouseOver={() => setCardWithMouseOver(i.inventory_id)}
-                            onMouseLeave={() => setCardWithMouseOver(null)}
-                            
-                            elevation={CardWithMouseOver == i.inventory_id ? mouseoverElevation : 2 }
+                            <Link
                                 key={i.inventory_id}
-                                className="border border-gray-200 rounded p-3"
+                                href={`/locations/${i.Location.location_id}`}
+                               
                             >
-                                <div className="flex justify-between items-start">
-                                    <div>
-                                        <p className="font-medium">
-                                            {i.Location
-                                                ?.warehouse ||
-                                                "Unknown Location"}
-                                        </p>
-                                        <p className="text-sm text-gray-600">
-                                            Zone: {i.Location
-                                                ?.zone || "N/A"} | Rack:{" "}
-                                            {i.Location
-                                                ?.rack || "N/A"} | Shelf:{" "}
-                                            {i.Location
-                                                ?.shelf || "N/A"}
-                                        </p>
-                                        {i.Location?.bin && (
-                                            <p className="text-sm text-gray-600">
-                                                Bin: {i.Location
-                                                    .bin}
+                                <Paper
+                                    onMouseOver={() =>
+                                        setCardWithMouseOver(i.inventory_id)}
+                                    onMouseLeave={() =>
+                                        setCardWithMouseOver(null)}
+                                    elevation={CardWithMouseOver ==
+                                            i.inventory_id
+                                        ? mouseoverElevation
+                                        : 2}
+                                    className="border border-gray-200 rounded p-3 my-4"
+                                >
+                                    <div className="flex justify-between items-start">
+                                        <div>
+                                            <p className="font-medium">
+                                                {i.Location
+                                                    ?.warehouse ||
+                                                    "Unknown Location"}
                                             </p>
-                                        )}
+                                            <p className="text-sm text-gray-600">
+                                                Zone: {i.Location
+                                                    ?.zone || "N/A"} | Rack:
+                                                {" "}
+                                                {i.Location
+                                                    ?.rack || "N/A"} | Shelf:
+                                                {" "}
+                                                {i.Location
+                                                    ?.shelf || "N/A"}
+                                            </p>
+                                            {i.Location?.bin && (
+                                                <p className="text-sm text-gray-600">
+                                                    Bin: {i.Location
+                                                        .bin}
+                                                </p>
+                                            )}
 
-                                        <p>
-                                            {`Location Code: ${i.Location.location_code}`}
-                                        </p>
-                                        <p className="text-xs text-gray-500 mt-1">
-                                            Last Updated: {new Date(
-                                                i.last_updated!,
-                                            ).toLocaleDateString()}
-                                        </p>
+                                            <p>
+                                                {`Location Code: ${i.Location.location_code}`}
+                                            </p>
+                                            <p className="text-xs text-gray-500 mt-1">
+                                                Last Updated: {new Date(
+                                                    i.last_updated!,
+                                                ).toLocaleDateString()}
+                                            </p>
+                                        </div>
+                                        <div className="text-right">
+                                            <p className="text-lg font-bold text-green-600">
+                                                {i.quantity}
+                                            </p>
+                                            <p className="text-xs text-gray-500">
+                                                units
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div className="text-right">
-                                        <p className="text-lg font-bold text-green-600">
-                                            {i.quantity}
-                                        </p>
-                                        <p className="text-xs text-gray-500">
-                                            units
-                                        </p>
-                                    </div>
-                                </div>
-                            </Paper>
+                                </Paper>
+                            </Link>
                         ))}
 
                         {/* Total Inventory Summary */}
                         <Paper elevation={8} className="border-t pt-3 mt-4 p-3">
-                            <Paper elevation={2} variant="elevation" className="flex justify-between items-center bg-gray-50 p-3 rounded">
+                            <Paper
+                                elevation={2}
+                                variant="elevation"
+                                className="flex justify-between items-center bg-gray-50 p-3 rounded"
+                            >
                                 <span className="font-semibold">
                                     Total Inventory:
                                 </span>

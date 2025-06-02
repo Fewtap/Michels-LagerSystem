@@ -4,6 +4,7 @@ import Card from "@/components/Card";
 import { Database, JoinedLocation, Location } from "@/Types/database.types";
 import { createClient } from "@/utils/serverclient";
 import { SupabaseClient } from "@supabase/supabase-js";
+import Link from "next/link";
 
 
 export default async function Locations() {
@@ -37,12 +38,15 @@ export default async function Locations() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {locations!.map((location) => (
-                    <Card key={location.location_id}>
-                        <h1>{location.location_code}</h1>
-                        {location.inventories.length == 0 ? (
-                            <h2>Location is Empty</h2>
-                        ): <h2>Amount of Articles: {location.inventories.length}</h2>}
-                    </Card>
+
+                    <Link href={`/locations/${location.location_id}`}>
+                        <Card key={location.location_id}>
+                            <h1>{location.location_code}</h1>
+                            {location.inventories.length == 0 ? (
+                                <h2>Location is Empty</h2>
+                            ): <h2>Amount of Articles: {location.inventories.length}</h2>}
+                        </Card>
+                    </Link>
                 ))}
             </div>
         </div>
