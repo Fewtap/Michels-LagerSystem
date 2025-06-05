@@ -7,6 +7,8 @@ import { createClient } from "@/utils/browserclient";
 import Link from "next/link";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { redirect } from "next/navigation";
+import { Button } from "@mui/material";
+import { FaBookOpen } from "react-icons/fa";
 
 export default function Articles() {
     const [articles, setArticles] = useState<JoinedArticle[]>([]);
@@ -36,31 +38,13 @@ export default function Articles() {
     }, []);
 
     return (
-        <div className="h-full w-full flex flex-col items-center justify-center">
-            <h1 className="text-2xl font-bold mb-4">Articles</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-6xl p-4">
-                {loading ? (
-                    <p className="">Loading...</p>
-                ) : articles.length > 0 ? (
-                    articles.map((article) => (
-                        <Card key={article.article_id} onClick={() => redirect(`/articles/${article.article_id}`)}>
-                            <h2 className="text-xl font-semibold mb-2">{article.Name}</h2>
-                            <p className=" mb-2">EAN: {article.EAN}</p>
-                            <p className=" mb-2">PCS: {article.PCS}</p>
-                            <p className=" mb-2">Size: {article.Size}</p>
-                            <p className="mb-2">Unit: {article.Unit}</p>
-                            <p className=" mb-2">Article ID: {article.article_id}</p>
-                            <h4 className=" mb-2">
-                                {article.inventories.length > 0
-                                    ? `✅ Locations: ${article.inventories.length}`
-                                    : "⛔ No locations found"}
-                            </h4>
-                            
-                        </Card>
-                    ))
-                ) : (
-                    <p className="text-gray-500">No articles found.</p>
-                )}
+        <div className="min-h-[60vh] w-full flex flex-col items-center justify-center p-6">
+            <div className="bg-white dark:bg-card rounded-xl shadow-lg border max-w-xl w-full flex flex-col items-center p-8">
+                <div className="flex items-center gap-3 mb-2">
+                  <FaBookOpen className="text-primary-600 dark:text-primary-400 text-3xl" aria-label="Articles Icon" />
+                  <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 tracking-tight">Articles</h1>
+                </div>
+                <p className="text-gray-500 dark:text-gray-400 mb-2 text-center text-base">Select an article to view its details.</p>
             </div>
         </div>
     );
