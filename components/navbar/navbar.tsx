@@ -26,7 +26,7 @@ const Navbar = ({ user, isInHomePage }: NavbarProps) => {
   return (
     <>
       {/* Navbar */}
-      <nav className="sticky top-0 z-50 w-full bg-purple-950 border-b border-purple-800 shadow-lg">
+      <nav className="sticky top-0 z-50 w-full bg-purple-950 border-b border-purple-800 shadow-lg max-h-[7.5vh]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Left section - Logo and Back Button */}

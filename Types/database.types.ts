@@ -61,9 +61,9 @@ export type Database = {
       }
       inventories: {
         Row: {
-          article_id: number | null
+          article_id: number
           inventory_id: string
-          last_updated: string | null
+          last_updated: string
           location_id: string
           quantity: number
         }

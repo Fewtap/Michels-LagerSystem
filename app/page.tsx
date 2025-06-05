@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div>
-      <div className="flex flex-col items-center justify-center min-h-screen text-white ">
+      <div className="flex flex-col items-center justify-center min-h-[calc(100vh-7.5vh)] h-[calc(100vh-7.5vh)] max-h-[calc(100vh-7.5vh)] text-white ">
         
         <h1 className="text-4xl font-bold mb-4 ">Welcome to My WMS</h1>
         <p className="text-lg mb-6">
