@@ -39,8 +39,8 @@ export default async function Locations() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {locations!.map((location) => (
 
-                    <Link href={`/locations/${location.location_id}`}>
-                        <Card key={location.location_id}>
+                    <Link key={location.location_id} href={`/locations/${location.location_id}`}>
+                        <Card>
                             <h1>{location.location_code}</h1>
                             {location.inventories.length == 0 ? (
                                 <h2>Location is Empty</h2>
